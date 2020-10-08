@@ -23,44 +23,66 @@ Things you may want to cover:
 
 * ...
 
-users テーブル
-Column	Type	Options
-name	string	null: false
-email	string	null: false
-password	string	null: false
-Association
-has_many :posts
-has_many :comments
+# テーブル設計
 
-comments テーブル
-Column	Type	Options
-text	text	
-user	references	null: false, foreign_key: true
-post	references	null: false, foreign_key: true
-Association
-belongs_to :user
-belongs_to :posts
+## users テーブル
 
-posts テーブル
-Column	Type	Options
-title	string	
-text	text	
-image	string	
-user	references	null: false, foreign_key: true
-Association
-belongs_to :user
-has_many :comments
-has_many :tags, through: :post_tags
+| Column	  | Type	   | Options     |
+| --------- | -------- | ----------- |
+| name	    | string	 | null: false |
+| email	    | string	 | null: false |
+| password	| string	 | null: false |
 
-post-tags テーブル
-Column	Type	Options
-post	references	null: false, foreign_key: true
-tag	references	null: false, foreign_key: true
-Association
-belongs_to :post belongs_to :tag
+### Association
 
-tags テーブル
-Column	Type	Options
-name	string	null:false, uniqueness: true
-Association
-has_many :posts, through: :post_tags
+- has_many :posts
+- has_many :comments
+
+# comments テーブル
+
+| Column	| Type	      | Options                        |
+|  ------ |  ---------  |                                |
+| text	  | text	      |                                |
+| user	  | references	| null: false, foreign_key: true |
+| post	  | references	| null: false, foreign_key: true |
+
+## Association
+
+- belongs_to :user
+- belongs_to :posts
+
+# posts テーブル
+
+| Column	 | Type	           | Options                        |
+| -------- | --------------- | ------------------------------ |
+| title	   | string	         |                                |
+| text	   | text	           |                                |
+| image	   | string	         |                                |
+| user	   | references	     | null: false, foreign_key: true |
+
+## Association
+
+- belongs_to :user
+- has_many :comments
+- has_many :tags, through: :post_tags
+
+# post-tags テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| post   | references | null: false, foreign_key: true |
+| tag    | references | null: false, foreign_key: true |
+
+## Association
+
+- belongs_to :post belongs_to :tag
+
+# tags テーブル
+
+| Column | Type    | Options                      |
+| ------ | --------| ---------------------------- |
+| name   | string  | null:false, uniqueness: true |
+
+## Association
+
+- has_many :posts, through: :post_tags
