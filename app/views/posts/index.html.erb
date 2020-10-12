@@ -91,16 +91,18 @@
     </nav>
   </div>
   <div class="row">
+<% @posts.each do |post| %>
   <div class="col-md-4">
-      <div class="card text-center ">
-        <img class="card-img-top" src="https://source.unsplash.com/random/1000x500" alt="">
+      <div class="card text-center">
+        <%= image_tag post.image, size: "100x190", class: "card-img-top" %>
         <div class="card-body">
-            <h4 class="card-text">タイトル</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quas.</p>
+            <h4 class="card-text"><%= post.title %></h4>
+            <p class="card-text"><%= post.text %></p>
             <a class="btn btn-primary btn-block" href="#">続き</a>
         </div>
       </div>
     </div>
+  <% end %>
     <div class="col-md-4">
       <div class="card text-center ">
         <img class="card-img-top" src="https://source.unsplash.com/random/1000x500" alt="">
