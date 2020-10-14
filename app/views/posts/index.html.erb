@@ -94,7 +94,7 @@
         <%= image_tag post.image, size: "100x200", class: "card-img-top" %>
             <h4 class="card-text"><%= post.title %></h4>
             <p class="card-text text-truncate"><%= post.text %></p>
-            <a class="btn btn-primary btn-block" href="#">続き</a>
+            <%= link_to "詳細ページへ", post_path(post.id), method: :get, class: "btn btn-outline-secondary  btn-block" %>
         </div>
       </div>
   <% end %>
