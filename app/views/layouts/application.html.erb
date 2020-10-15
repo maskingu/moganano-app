@@ -28,9 +28,10 @@
         <%= link_to "新規投稿", new_post_path, class: "nav-alink btn btn-outline-secondary" %>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-alink btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="/">マイページ</a>
+
+          <a class="nav-alink btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="/"><%= current_user.nickname %></a>
         <div class="dropdown-menu">
-        <a class="dropdown-item"href="/">記事</a>
+        <%= link_to "記事", "/users/#{current_user.id}", class: "dropdown-item" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
         </div>
         </li>
@@ -46,14 +47,14 @@
   </nav>
 
 <% if notice %>
-  <p class="notice"><%= notice %></p>
+  <p class="alert alert-success text-center" role="alert"><%= notice %></p>
 <% elsif alert %>
   <p class="alert"><%= alert %></p>
 <% end %>
 
     <%= yield %>
     <nav class="navbar bg-light navbar-light navbar-expand-md mt-5 fixed-bottom">
-    <a class="navbar-brand text-center" href="#">© 2020 Moganano</a>
+    <a class="navbar-brand text-center" href="/">© 2020 Moganano</a>
     </nav>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
