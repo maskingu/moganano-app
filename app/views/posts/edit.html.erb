@@ -1,0 +1,25 @@
+
+<div class="container">
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+<h3 class="text-center m-5">編集する</h3>
+  <%= form_with(model: @post, local: true) do |f| %>
+      <div class="card text-center">
+        <div class="custom-file mt-3">
+      <%= f.text_field :image, placeholder: "画像のURLを貼ってください", class: "form-control" %>
+    </div>
+    <div class="form-group mt-3">
+      <%= f.text_field :title, placeholder: "タイトル", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_area :text, placeholder: "本文", class: "form-control" %>
+    </div>
+    
+    <div class="form-group text-center">
+      <%= f.submit "更新", class: "btn btn-primary" %>
+    </div>
+            <% end %>
+        </div>
+      </div>
+  </div>
+</div>
