@@ -6,8 +6,11 @@
 <%= link_to "編集", edit_post_path(@post.id), method: :get, class: "btn btn-outline-secondary btn-block" %>
 <%= link_to "削除", post_path(@post.id), method: :delete, class: "btn btn-outline-secondary btn-block" %>
 <% end %>
+<br>
+<br>
+
       <div class="card text-center">
-        <%= image_tag @post.image, size: "300x400", class: "card-img-top" %>
+        <%= image_tag @post.image, size: "200x400", class: "card-img-top" %>
             <h4 class="card-text"><%= @post.title %></h4>
             <p class="card-text"><%= @post.text %></p>
               <%= link_to "トップページ", root_path, method: :get, class: "btn btn-outline-secondary btn-block" %>

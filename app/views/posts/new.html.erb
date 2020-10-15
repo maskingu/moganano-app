@@ -9,7 +9,7 @@
     <%= form_with model: @post, local: true do |f| %>
 
     <div class="custom-file mt-3">
-      <%= f.text_field :image, placeholder: "画像のURLを貼ってください", class: "form-control" %>
+      <%= f.file_field :image, placeholder: "画像のURLを貼ってください", class: "form-control" %>
     </div>
 
 

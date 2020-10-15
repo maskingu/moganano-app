@@ -64,3 +64,5 @@ gem 'devise'
 gem 'devise-i18n'
 
 gem 'font-awesome-rails'
+
+gem 'mini_magick'
