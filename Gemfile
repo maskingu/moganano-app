@@ -66,3 +66,5 @@ gem 'devise-i18n'
 gem 'font-awesome-rails'
 
 gem 'mini_magick'
+
+gem 'aws-sdk-s3'
