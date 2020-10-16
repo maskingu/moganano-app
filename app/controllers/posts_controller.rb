@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
+  before_action :set_post, only: [:show, :edit]
 
   
   def index
@@ -16,7 +17,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order("created_at DESC")
   end
 
   def destroy
@@ -29,7 +31,6 @@ class PostsController < ApplicationController
   end
 
 def edit
-  @post = Post.find(params[:id])
 end
 
 def update
@@ -53,5 +54,8 @@ def move_to_index
   end
 end
 
+def set_post
+  @post = Post.find(params[:id])
+end
 
 end
