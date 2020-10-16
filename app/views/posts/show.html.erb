@@ -13,21 +13,24 @@
     <%= image_tag @post.image, size: "200x500", class: "card-img-top" %>
         <h4 class="card-text"><%= @post.title %></h4>
         <p class="card-text"><%= @post.text %></p>
-          <%= link_to "トップページ", root_path, method: :get, class: "b  btn-outline-secondary btn-block" %>
+          <%= link_to "トップページ", root_path, method: :get, class: "btn  btn-outline-secondary btn-block" %>
         </div>
-        <br>
         <br>
         <div class="row">
-        <div class="col">
+        <div class="col-12">
         <% if current_user %>
             <%= form_with(model: [@post, @comment], local: true) do |form| %>
-              <%= form.text_area :text, placeholder: "コメント", rows: "2" %>
-              <%= form.submit "SEND" %> <% end %>
+            <div class="form-group mx-auto" style="width: 540px;">
+              <%= form.text_area :text, placeholder: "コメント", rows: "2", class: "form-control" %>
+              <%= form.submit "SEND", class: "btn btn-outline-secondary btn-block"%> <% end %>
+            </div>
             <% else %>
             <strong><p>※※※ コメントするにはログインしてください ※※※</p></strong>
-          <% end %> </div>
-        </div>
-          <div class="comments">
+          <% end %> 
+            </div>
+      <br>
+        <br>
+          <div class="col">
     <h4>コメント一覧</h4> <% if @comments %>
     <% @comments.each do |comment| %> <p>
     <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %></strong>
@@ -35,9 +38,7 @@
     <% end %>
     <% end %>
     </div>
-        <br>
-        <br>
-      
     </div>
   </div>
   </div>
+
