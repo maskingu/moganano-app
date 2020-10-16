@@ -9,11 +9,17 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = PostsTag.new
   end
 
   def create
-    Post.create(post_params)
+    @post = PostsTag.new(post_params)
+    if @post.valid?
+      @post.save
+      return redirect_to root_path
+    else
+      render "new"
+    end
   end
 
   def show
@@ -49,7 +55,7 @@ end
 private
 
 def post_params
-params.require(:post).permit(:image, :title, :text).merge(user_id: current_user.id)
+params.require(:posts_tag).permit(:image, :title, :text, :name).merge(user_id: current_user.id)
 end
 
 def move_to_index
