@@ -13,15 +13,23 @@
   <body>
   <nav class="navbar bg-light navbar-light navbar-expand-md">
         <a class="navbar-brand" href="/">Moganano</a>
-      
-      
+    
+  
+
+
+    
         <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
         <div class="navbar-item d-flex justify-content-end align-items-center">
-        <a class="text-muted" href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
-        </a>
-        </div>
+        <form class="form-inline my-2 my-lg-0">
+        <%= form_with(url: search_posts_path, local: true, method: :get) do |form| %>
+          <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "form-control mr-sm-2" %>
+          <%= form.submit "検索", class: "nav-alink btn btn-outline-secondary mr-2" %>
+        <% end %>
+        
+          </form>
+          </div>
+          
         <% if user_signed_in? %>  
         
         <li class="nav-item mr-2">
