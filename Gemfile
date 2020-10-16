@@ -68,3 +68,5 @@ gem 'font-awesome-rails'
 gem 'mini_magick'
 
 gem 'aws-sdk-s3'
+
+gem 'ransack'
