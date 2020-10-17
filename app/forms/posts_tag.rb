@@ -13,7 +13,8 @@ class PostsTag
 
   def save
     post = Post.create(text: text, title: title, image: image, user_id: user_id)
-    tag = Tag.create(name: name)
+    tag = Tag.where(name: name).first_or_initialize
+    tag.save
 
     PostTagRelation.create(post_id: post.id, tag_id: tag.id)
   end

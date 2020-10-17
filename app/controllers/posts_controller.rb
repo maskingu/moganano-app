@@ -28,7 +28,10 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.search(params[:keyword])
+    # @posts = Post.search(params[:keyword])
+    return nil if params[:input] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
+    render json:{ keyword: tag }
   end
 
   def destroy

@@ -13,6 +13,12 @@
     <%= image_tag @post.image, size: "200x500", class: "card-img-top" %>
         <h4 class="card-text"><%= @post.title %></h4>
         <p class="card-text"><%= @post.text %></p>
+        <ul class="tag">
+            <li class="tag-list">
+            <% @post.tags.each do |tag| %> 
+            #<%=tag.name%>
+            <%end%> </li>
+            </ul>
           <%= link_to "トップページ", root_path, method: :get, class: "btn  btn-outline-secondary btn-block" %>
         </div>
         <br>
