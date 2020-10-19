@@ -1,12 +1,20 @@
-<div class="row">
-  <% @posts.each do |post| %>
-    <div class="col-md-4 mt-5">
+
+<div class="contents row">
+  <% @post.each do |post| %>
+  <div class="col-md-4 mt-5">
       <div class="card text-center">
         <%= image_tag post.image, size: "100x200", class: "card-img-top" %>
             <h4 class="card-text"><%= post.title %></h4>
             <p class="card-text text-truncate"><%= post.text %></p>
+            <ul class="tag">
+            <li class="tag-list">
+            <% post.tags.each do |tag| %> 
+            #<%=tag.name%>
+            <%end%> </li>
+            </ul>
             <%= link_to "詳細ページへ", post_path(post.id), method: :get, class: "btn btn-outline-secondary  btn-block" %>
         </div>
       </div>
+      
   <% end %>
-  </div>
+</div>

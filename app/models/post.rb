@@ -1,9 +1,4 @@
 class Post < ApplicationRecord
-  # validates :text, :title, presence: true, unless: :was_attached?
-
-  # def was_attached?
-  #   self.image.attached?
-  # end
 
   has_many :post_tag_relations
   has_many :tags, through: :post_tag_relations

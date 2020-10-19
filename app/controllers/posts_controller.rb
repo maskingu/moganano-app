@@ -4,8 +4,8 @@ class PostsController < ApplicationController
 
   
   def index
-    @posts = Post.all.order("created_at DESC")
-    # @posts = Post.include(:user)
+    @posts = Post.includes(:user).order("created_at DESC")
+
   end
 
   def new
@@ -28,7 +28,8 @@ class PostsController < ApplicationController
   end
 
   def search
-    # @posts = Post.search(params[:keyword])
+    @posts = Post.search(params[:keyword])
+
     return nil if params[:input] == ""
     tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
     render json:{ keyword: tag }
