@@ -4,16 +4,22 @@ class PostsController < ApplicationController
 
   
   def index
-    @posts = Post.all.order("created_at DESC")
-    # @posts = Post.include(:user)
+    @posts = Post.includes(:user).order("created_at DESC")
+
   end
 
   def new
-    @post = Post.new
+    @post = PostsTag.new
   end
 
   def create
-    Post.create(post_params)
+    @post = PostsTag.new(post_params)
+    if @post.valid?
+      @post.save
+      return redirect_to root_path
+    else
+      render "new"
+    end
   end
 
   def show
@@ -23,6 +29,10 @@ class PostsController < ApplicationController
 
   def search
     @posts = Post.search(params[:keyword])
+
+    return nil if params[:input] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
+    render json:{ keyword: tag }
   end
 
   def destroy
@@ -49,7 +59,7 @@ end
 private
 
 def post_params
-params.require(:post).permit(:image, :title, :text).merge(user_id: current_user.id)
+params.require(:posts_tag).permit(:image, :title, :text, :name).merge(user_id: current_user.id)
 end
 
 def move_to_index

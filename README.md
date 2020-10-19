@@ -66,12 +66,12 @@ Things you may want to cover:
 - has_many :comments
 - has_many :tags, through: :post_tags
 
-# post-tags テーブル
+# post-tags_relations テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| post   | references | null: false, foreign_key: true |
-| tag    | references | null: false, foreign_key: true |
+| post   | references | foreign_key: true              |
+| tag    | references | foreign_key: true              |
 
 ## Association
 
