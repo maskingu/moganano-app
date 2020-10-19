@@ -8,13 +8,13 @@
         </ol> 
           <div class="carousel-inner">
               <div class="carousel-item ">
-                  <img class="img-fluid" src="https://source.unsplash.com/1800x700/?earth" alt="First Slide">
+                  <%# <img class="img-fluid" src="https://source.unsplash.com/1800x700/?earth" alt="First Slide"> %>
               </div>
               <div class="carousel-item active">
-                  <img class="img-fluid" src="https://source.unsplash.com/1800x700/?forest" alt="Second Slide">
+                  <%# <img class="img-fluid" src="https://source.unsplash.com/1800x700/?forest" alt="Second Slide"> %>
               </div>
               <div class="carousel-item">
-                  <img class="img-fluid" src="https://source.unsplash.com/1800x700/?sea" alt="Third Slide">
+                  <%# <img class="img-fluid" src="https://source.unsplash.com/1800x700/?sea" alt="Third Slide"> %>
               </div>
           </div>
           <a class="carousel-control-prev" href="#carousel" data-slide="prev">
@@ -87,6 +87,7 @@
     </nav>
   </div>
   <div class="row">
+  
   <% @posts.each do |post| %>
     <div class="col-md-4 mt-5">
       <div class="card text-center">
@@ -95,6 +96,17 @@
             <p class="card-text text-truncate"><%= post.text %></p>
             <ul class="tag">
             <li class="tag-list">
+        <div class="like-link" id="like-link-<%= post.id %>">
+          <% if current_user.likes.find_by(post_id: post.id) %>
+            <%= link_to unlike_path(post.id), method: :delete, remote: true do %>
+                <div class = "iine__button">❤️<%= post.likes.count %></div>
+            <% end %>
+          <% else %>
+            <%= link_to like_path(post.id), method: :post, remote: true do %>
+                <div class = "iine__button">♡️<%= post.likes.count %></div>
+            <% end %>
+          <% end %>
+        </div>
             <% post.tags.each do |tag| %> 
             #<%=tag.name%>
             <%end%> </li>
