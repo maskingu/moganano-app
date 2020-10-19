@@ -3,12 +3,12 @@ class LikesController < ApplicationController
   before_action :set_valiables
 
   def like
-    Like = current_user.likes.new(post.id: @post.id)
+    like = current_user.likes.new(post_id: @post.id)
     like.save
   end
 
   def unlike
-    like = current_user.likes.find_by(post.id: @post.id)
+    like = current_user.likes.find_by(post_id: @post.id)
     like.destroy
   end
 
