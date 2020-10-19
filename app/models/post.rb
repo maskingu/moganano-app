@@ -1,11 +1,11 @@
 class Post < ApplicationRecord
 
-  has_many :post_tag_relations
-  has_many :tags, through: :post_tag_relations
-  belongs_to :user
+  has_many :post_tag_relations, dependent: :destroy
+  has_many :tags, through: :post_tag_relations, dependent: :destroy
+  belongs_to :user, optional: true
   has_one_attached :image
   has_many :comments
-  
+
   has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
 
