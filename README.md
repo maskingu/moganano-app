@@ -37,11 +37,13 @@ Things you may want to cover:
 
 - has_many :posts
 - has_many :comments
+- has_many :likes, dependent: :destroy
+- has_many :like_posts, through: :likes, source: :post
 
 # comments テーブル
 
-| Column	| Type	      | Options                        |
-|  ------ |  ---------  |                                |
+| Column  | Type        | Options                        |
+|  ------ |  ---------- |                                |
 | text    | text        |                                |
 | use     | references  | null: false, foreign_key: true |
 | post    | references  | null: false, foreign_key: true |
@@ -53,18 +55,22 @@ Things you may want to cover:
 
 # posts テーブル
 
-| Column	 | Type	           | Options                        |
-| -------- | --------------- | ------------------------------ |
-| title	   | string	         |                                |
-| text	   | text	           |                                |
-| image	   | string	         |                                |
-| user	   | references	     | null: false, foreign_key: true |
+| Column      | Type             | Options                        |
+| ----------- | ---------------- | ------------------------------ |
+| title       | string           |                                |
+| text        | text             |                                |
+| image       | string           |                                |
+| user        | references       | null: false, foreign_key: true |
+| likes_count | integer          |                                |
+
 
 ## Association
 
 - belongs_to :user
 - has_many :comments
 - has_many :tags, through: :post_tags
+- has_many :likes, dependent: :destroy
+- has_many :liking_users, through: :likes, source: :user
 
 # post-tags_relations テーブル
 
@@ -86,3 +92,14 @@ Things you may want to cover:
 ## Association
 
 - has_many :posts, through: :post_tags
+
+# likes テーブル
+
+| Column    | Type        | Options                      |
+| --------- | ----------- | ---------------------------- |
+| user_id   | references  | foreign_key: true            |
+| post_id   | references  | foreign_key: true            |
+
+## Association
+- belongs_to :post, counter_cache: :likes_count
+- belongs_to :user
