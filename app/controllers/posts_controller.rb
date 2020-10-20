@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show, :search]
+  before_action :move_to_index, except: [:index, :show, :seart]
   before_action :set_post, only: [:show, :edit]
 
   
@@ -24,19 +24,6 @@ class PostsController < ApplicationController
     
   end
 
-  def show
-    @comment = Comment.new
-    @comments = @post.comments.includes(:user).order("created_at DESC")
-  end
-
-  def search
-    @posts = Post.search(params[:keyword])
-    
-    return nil if params[:input] == ""
-    tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
-    render json:{ keyword: tag }
-  end
-
   def destroy
     post = Post.find(params[:id])
     if post.destroy
@@ -57,6 +44,27 @@ def update
     render :edit
   end
 end
+
+  def show
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order("created_at DESC")
+  end
+
+
+  # def search
+  # end
+
+  def search   
+    @posts = Post.search(params[:keyword])
+
+    return nil if params[:input] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
+    render json:{ keyword: tag }
+  end
+
+  
+
+  
   
 private
 

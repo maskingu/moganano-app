@@ -9,7 +9,6 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
 
-
   def self.search(search)
     if search != ""
       Post.where('text LIKE(?)', "%#{search}%")

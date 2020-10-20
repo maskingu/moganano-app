@@ -1,13 +1,16 @@
-
-<div class="contents row">
-  <% @post.each do |post| %>
-  <div class="col-md-4 mt-5">
+<%= form_with(url: seart_posts_path, local: true, method: :get, class: "search-form") do |form| %>
+          <%= form.text_field :keyword, placeholder: "投稿", class: "search-input" %>
+          <%= form.submit "検索", class: "search-btn" %>
+        <% end %>
+<%# <% @posts.each do |post| %> %>
+    <div class="col-md-4 mt-5">
       <div class="card text-center">
         <%= image_tag post.image, size: "100x200", class: "card-img-top" %>
             <h4 class="card-text"><%= post.title %></h4>
             <p class="card-text text-truncate"><%= post.text %></p>
             <ul class="tag">
             <li class="tag-list">
+                        <div class = "iine__button">❤️<%= post.likes.count %></div>
             <% post.tags.each do |tag| %> 
             #<%=tag.name%>
             <%end%> </li>
@@ -15,6 +18,4 @@
             <%= link_to "詳細ページへ", post_path(post.id), method: :get, class: "btn btn-outline-secondary  btn-block" %>
         </div>
       </div>
-      
   <% end %>
-</div>

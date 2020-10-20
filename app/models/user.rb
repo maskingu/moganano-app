@@ -18,4 +18,5 @@ class User < ApplicationRecord
     validates :password, confirmation: true, length: { minimum: 6 }, format: { with: PASSWORD_REGEX, message: 'には英字と数字の両  方を含めて設定してください' }
     F_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]+\z/.freeze
     end
+    
 end
