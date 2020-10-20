@@ -13,6 +13,24 @@
     <%= image_tag @post.image, size: "200x500", class: "card-img-top" %>
         <h4 class="card-text"><%= @post.title %></h4>
         <p class="card-text"><%= @post.text %></p>
+                <% if current_user %>
+
+        <div class="like-link" id="like-link-<%= @post.id %>">
+          <% if current_user.likes.find_by(post_id: @post.id) %>
+            <%= link_to unlike_path(@post.id), method: :delete, remote: true do %>
+                <div class = "iine__button">❤️<%= @post.likes.count %></div>
+            <% end %>
+          <% else %>
+            <%= link_to like_path(@post.id), method: :post, remote: true do %>
+                <div class = "iine__button">♡️<%= @post.likes.count %></div>
+            <% end %>
+          <% end %>
+        </div>
+      
+        <% else %>
+
+    <div class = "iine__button">❤️<%= @post.likes.count %></div>
+<% end %> 
         <ul class="tag">
             <li class="tag-list">
             <% @post.tags.each do |tag| %> 
@@ -25,11 +43,13 @@
         <div class="row">
         <div class="col-12">
         <% if current_user %>
+        
             <%= form_with(model: [@post, @comment], local: true) do |form| %>
             <div class="form-group mx-auto" style="width: 540px;">
               <%= form.text_area :text, placeholder: "コメント", rows: "2", class: "form-control" %>
               <%= form.submit "SEND", class: "btn btn-outline-secondary btn-block"%> <% end %>
             </div>
+            
             <% else %>
             <strong><p>※※※ コメントするにはログインしてください ※※※</p></strong>
           <% end %> 

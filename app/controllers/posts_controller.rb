@@ -13,7 +13,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = PostsTag.new(post_params)
+
+    @post = PostsTag.new(posts_tag_params)
     if @post.valid?
       @post.save
       return redirect_to root_path
@@ -49,8 +50,8 @@ def edit
 end
 
 def update
-  post = Post.find(params[:id])
-  if post.update(post_params)
+  @post = Post.find(params[:id])
+  if @post.update(post_params)
     redirect_to root_path
   else
     render :edit
@@ -60,8 +61,12 @@ end
 private
 
 def post_params
-params.require(:posts_tag).permit(:image, :title, :text, :name).merge(user_id: current_user.id)
+params.require(:post).permit(:image, :title, :text, :name, :comment).merge(user_id: current_user.id)
 end
+
+def posts_tag_params
+  params.require(:posts_tag).permit(:image, :title, :text, :name, :comment).merge(user_id: current_user.id)
+  end
 
 def move_to_index
   unless user_signed_in?
