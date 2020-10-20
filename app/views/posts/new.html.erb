@@ -9,7 +9,8 @@
     <%= form_with model: @post, url: posts_path, local: true do |f| %>
 
     <div class="custom-file mt-3">
-      <%= f.file_field :image, placeholder: "画像のURLを貼ってください", class: "form-control" %>
+      <%= f.file_field :image, class: "custom-file-input" %>
+      <label class="custom-file-label" for="customFile">画像を選んでください</label>
     </div>
 
 
