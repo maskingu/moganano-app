@@ -2,7 +2,7 @@
 <div class="container ">
 <div class="row">
     <div class="col-md-6 offset-md-3">
-<% if user_signed_in?%>
+<% if user_signed_in? && current_user.id == @post.user_id%>
 <%= link_to "編集", edit_post_path(@post.id), method: :get, class: "btn btn-outline-secondary btn-block" %>
 <%= link_to "削除", post_path(@post.id), method: :delete, class: "btn btn-outline-secondary btn-block" %>
 <% end %>
@@ -40,6 +40,9 @@
           <%= link_to "トップページ", root_path, method: :get, class: "btn  btn-outline-secondary btn-block" %>
         </div>
         <br>
+
+    </div>
+      <div class="container ">
         <div class="row">
         <div class="col-12">
         <% if current_user %>
@@ -56,15 +59,16 @@
             </div>
       <br>
         <br>
-          <div class="col">
+          <div class="col-12">
     <h4>コメント一覧</h4> <% if @comments %>
-    <% @comments.each do |comment| %> <p>
+    <% @comments.each do |comment| %>
+    <p>
     <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %></strong>
-    <%= comment.text %> </p>
+    <%= comment.text %></p>
     <% end %>
     <% end %>
     </div>
     </div>
   </div>
-  </div>
+  
 
