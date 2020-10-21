@@ -1,15 +1,23 @@
+<p class="ml-3"><%= @nickname %>さんの投稿一覧</p>
 <div class="row">
-<p><%= @nickname %>さんの投稿一覧</p>
-  <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
     <div class="col-md-4 mt-5">
-    <br>
-    <br>
       <div class="card text-center">
-        <%= image_tag post.image, size: "150x200", class: "card-img-top" %>
+        <%= image_tag post.image, size: "100x200", class: "card-img-top" %>
             <h4 class="card-text"><%= post.title %></h4>
             <p class="card-text text-truncate"><%= post.text %></p>
+            <ul class="tag">
+            <li class="tag-list">
+            <div class = "iine__button">❤️<%= post.likes.count %></div>
+            <% post.tags.each do |tag| %> 
+            #<%=tag.name%>
+            <%end%> </li>
+            </ul>
             <%= link_to "詳細ページへ", post_path(post.id), method: :get, class: "btn btn-outline-secondary  btn-block" %>
         </div>
       </div>
   <% end %>
-  </div>
+</div>
+
+  <div style="margin-top:200px;"></div>
+

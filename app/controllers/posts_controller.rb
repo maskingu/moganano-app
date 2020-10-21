@@ -5,7 +5,6 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.includes(:user).order("created_at DESC")
-
   end
 
   def new
@@ -13,7 +12,6 @@ class PostsController < ApplicationController
   end
 
   def create
-
     @post = PostsTag.new(posts_tag_params)
     if @post.valid?
       @post.save
@@ -24,18 +22,6 @@ class PostsController < ApplicationController
     
   end
 
-  def show
-    @comment = Comment.new
-    @comments = @post.comments.includes(:user).order("created_at DESC")
-  end
-
-  def search
-    @posts = Post.search(params[:keyword])
-    
-    return nil if params[:input] == ""
-    tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
-    render json:{ keyword: tag }
-  end
 
   def destroy
     post = Post.find(params[:id])
@@ -46,18 +32,33 @@ class PostsController < ApplicationController
     end
   end
 
-def edit
-end
+  def edit
+  end
 
-def update
+  def update
   @post = Post.find(params[:id])
   if @post.update(post_params)
     redirect_to root_path
   else
     render :edit
   end
-end
-  
+  end
+
+  def show
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order("created_at DESC")
+  end
+
+  def search
+    @posts = Post.search(params[:keyword])
+  end
+
+  def tag
+    return nil if params[:input] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:input]}%"] )
+    render json:{ keyword: tag }
+  end
+
 private
 
 def post_params
@@ -77,5 +78,6 @@ end
 def set_post
   @post = Post.find(params[:id])
 end
+
 
 end
