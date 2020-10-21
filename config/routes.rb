@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root to: 'posts#index'
   resources :posts do
-    resources :comments, only: :create
+    resources :comments, only: [:create, :show]
     collection do
       get 'search'
     end

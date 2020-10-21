@@ -96,7 +96,9 @@
             <p class="card-text text-truncate"><%= post.text %></p>
             <ul class="tag">
             <li class="tag-list">
-                        <div class = "iine__button">❤️<%= post.likes.count %></div>
+            <div class = "iine__button">❤️<%= post.likes.count %>
+              <span class="ml-2 text-muted">投稿者<%= post.user.nickname %></span>
+            </div>
             <% post.tags.each do |tag| %> 
             #<%=tag.name%>
             <%end%> </li>

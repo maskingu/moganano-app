@@ -5,15 +5,20 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.includes(:user).order("created_at DESC")
-
+    @post = Post.new
   end
 
   def new
     @post = PostsTag.new
   end
 
-  def create
 
+  def show
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order("created_at DESC")
+  end
+  
+  def create
     @post = PostsTag.new(posts_tag_params)
     if @post.valid?
       @post.save
@@ -45,14 +50,7 @@ def update
   end
 end
 
-  def show
-    @comment = Comment.new
-    @comments = @post.comments.includes(:user).order("created_at DESC")
-  end
-
-
-  # def search
-  # end
+  
 
   def search   
     @posts = Post.search(params[:keyword])
