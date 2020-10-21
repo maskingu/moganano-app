@@ -3,7 +3,7 @@ if (location.pathname.match("posts/new")){
   const inputElement = document.getElementById("posts_tag_name");
   inputElement.addEventListener("keyup", (e) => {
   const input = document.getElementById("posts_tag_name").value; const xhr = new XMLHttpRequest();
-  xhr.open("GET", `search/?input=${input}`, true); xhr.responseType = "json";
+  xhr.open("GET", `tag/?input=${input}`, true); xhr.responseType = "json";
   xhr.send();
   xhr.onload = () => {
   const tagName = xhr.response.keyword;
