@@ -1,28 +1,25 @@
 
-<div class="container">
+<div class="container ">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-10 mx-auto">
       <% if user_signed_in? && current_user.id == @post.user_id%>
         <%= link_to "編集", edit_post_path(@post.id), method: :get, class: "btn btn-outline-secondary btn-block" %>
         <%= link_to "削除", post_path(@post.id), method: :delete, class: "btn btn-outline-secondary btn-block" %>
       <% end %>
     <br>
     <br>
-
-  <div class="card text-center">
-    <%= image_tag @post.image, size: "200x300", class: "card-img-top" %>
-      <h4 class="card-text"><%= @post.title %></h4>
-        <p class="card-text"><%= @post.text %></p>
-          <span class="name">
-        <a href="/users/<%= @post.user.id %>">
-          <span class="ml-2 text-muted">投稿者<%= @post.user.nickname %></span>
-        </a>
-      </span>
-              <% if current_user %>
-      <div class="like-link" id="like-link-<%= @post.id %>">
-        <% if current_user.likes.find_by(post_id: @post.id) %>
+  <div class="starter-template " style="width: auto;">
+    <%= image_tag @post.image, class: "img-fluid", size: "1000x1000" %>
+  </div>
+  <br>
+  <br>
+  <br>
+      <h1 class=""><%= @post.title %></h1>
+      <% if current_user %>
+        <div class="like-link" id="like-link-<%= @post.id %>">
+          <% if current_user.likes.find_by(post_id: @post.id) %>
           <%= link_to unlike_path(@post.id), method: :delete, remote: true do %>
-      <div class = "iine__button">❤️<%= @post.likes.count %></div>
+        <div class = "iine__button">❤️<%= @post.likes.count %></div>
           <% end %>
         <% else %>
           <%= link_to like_path(@post.id), method: :post, remote: true do %>
@@ -31,26 +28,34 @@
         <% end %>
       </div>
       <% else %>
-      <div class = "iine__button">❤️<%= @post.likes.count %></div>
-      <% end %> 
+      <div class = "iine__button">❤️<%= @post.likes.count %>
       <ul class="tag">
-          <li class="tag-list">
+        <li class="tag-list">
           <% @post.tags.each do |tag| %> 
           #<%=tag.name%>
-          <%end%> </li>
-          </ul>
+          <%end%>
+        </li>
+      </ul>
+      </div>
+      <% end %>
+      
+      
+      
+      
+        <p><%= @post.text %></p>
+          <span class="name">
+        <a href="/users/<%= @post.user.id %>">
+          <span class="ml-2 text-muted">投稿者<%= @post.user.nickname %></span>
+        </a>
+      </span>
+      
         <%= link_to "トップページ", root_path, method: :get, class: "btn  btn-outline-secondary btn-block" %>
       </div>
       <br>
-    </div>
-
-    </div>
-  <div class="container ">
-    <div class="row">
-      <div class="col-12">
+<div class="col-10 mx-auto">
         <% if current_user %>
           <%= form_with(model: [@post, @comment], local: true) do |form| %>
-          <div class="form-group mx-auto" style="width: 540px;">
+          <div class="form-group ">
             <%= form.text_area :text, placeholder: "コメント", rows: "2", class: "form-control" %>
             <%= form.submit "SEND", class: "btn btn-outline-secondary btn-block"%> <% end %>
           </div>
@@ -58,6 +63,7 @@
           <strong><p class="text-center">※※※ コメントするにはログインしてください ※※※</p></strong>
           <% end %> 
       </div>
+    </div>
       <br>
       <br>
   <div class="col text-center">
@@ -80,7 +86,6 @@
       <% end %>
       <% end %>
       <% end %>
-  </div>
   </div>
 </div>
   <div style="margin-top:200px;"></div>
