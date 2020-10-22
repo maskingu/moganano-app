@@ -4,4 +4,6 @@ class Tag < ApplicationRecord
   has_many :posts, through: :post_tag_relations, dependent: :destroy
 
   validates :name, uniqueness: true
+  
+  
 end

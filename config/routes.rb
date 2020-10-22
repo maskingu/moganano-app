@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   post   '/like/:post_id' => 'likes#like',   as: 'like'
   delete '/like/:post_id' => 'likes#unlike', as: 'unlike'
-
+  
   root to: 'posts#index'
   resources :posts do
     resources :comments, only: :create
@@ -13,4 +13,6 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: :show
+
+
 end
