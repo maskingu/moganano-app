@@ -51,6 +51,8 @@ class PostsController < ApplicationController
 
   def search
     @posts = Post.search(params[:keyword])
+    @tags = Tag.search(params[:keyword])
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
   end
 
   def tag
