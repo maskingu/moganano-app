@@ -11,7 +11,7 @@ class Post < ApplicationRecord
 
   def self.search(search)
     if search != ""
-      Post.joins(:tags).where('tags.name LIKE(?) OR text LIKE(?) OR title LIKE(?)',"%#{search}%","%#{search}%","%#{search}%")
+      Post.joins(:tags).where('tags.name LIKE(?) OR text LIKE(?) OR title LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")
     else
       Post.all
     end
